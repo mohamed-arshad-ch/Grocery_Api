@@ -7,7 +7,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import permissions
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.views import LoginView as KnoxLoginView
-from rest_framework import filters
+# from rest_framework import filters
 from rest_framework.pagination import PageNumberPagination
 from .modelcontroller import *
 from .models import *
@@ -534,8 +534,8 @@ class UpdateForOrder(generics.UpdateAPIView):
 class SortAccounts(generics.ListAPIView):
     queryset = ChartOfAccounts.objects.all()
     serializer_class = CategorySerializer
-    filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
-    filterset_fields = "__all__"
+    # filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
+    # filterset_fields = "__all__"
     pagination_class = PageNumberPagination
     pagination_class.page_size_query_param = 'limit'
     
@@ -567,8 +567,8 @@ class PartialSearchForAccounts(generics.ListAPIView):
 class SortProducts(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
-    filterset_fields = "__all__"
+    # filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
+    # filterset_fields = "__all__"
     pagination_class = PageNumberPagination
     pagination_class.page_size_query_param = 'limit'
     
@@ -600,8 +600,8 @@ class PartialSearchForProduct(generics.ListAPIView):
 class SortSubCategory(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = SubCategorySerializer
-    filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
-    filterset_fields = "__all__"
+    # filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
+    # filterset_fields = "__all__"
     pagination_class = PageNumberPagination
     pagination_class.page_size_query_param = 'limit'
     
@@ -633,8 +633,8 @@ class PartialSearchForSubCategory(generics.ListAPIView):
 class SortOrder(generics.ListAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
-    filterset_fields = "__all__"
+    # filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
+    # filterset_fields = "__all__"
     pagination_class = PageNumberPagination
     pagination_class.page_size_query_param = 'limit'
     
@@ -666,8 +666,8 @@ class PartialSearchForOrder(generics.ListAPIView):
 class SortOrderItems(generics.ListAPIView):
     queryset = OrderItems.objects.all()
     serializer_class = OrderItemSerializer
-    filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
-    filterset_fields = "__all__"
+    # filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
+    # filterset_fields = "__all__"
     pagination_class = PageNumberPagination
     pagination_class.page_size_query_param = 'limit'
     
