@@ -30,7 +30,29 @@ urlpatterns = [
     path('mainadmin/banner/<str:pk>',UpdateForBanner.as_view()),
     path('user/billingaddress/<str:pk>',UpdateForBillingAddress.as_view()),
 
+    path('mainadmin/category/all',SortAccounts.as_view()),
+    path('mainadmin/product/all',SortProducts.as_view()),
+    path('mainadmin/subcategory/all',SortSubCategory.as_view()),
+    path('user/order/all',SortOrder.as_view()),
+    path('user/orderitems/all',PartialSearchForOrderItems.as_view()),
+    path('mainadmin/coupon/all',SortAccounts.as_view()),
+    path('user/wishlist/all',SortAccounts.as_view()),
+    path('mainadmin/attributes/all',SortAccounts.as_view()),
+    path('mainadmin/banner/all',SortAccounts.as_view()),
+    path('user/billingaddress/all',SortAccounts.as_view()),
 
+
+    path('mainadmin/category/search',PartialSearchForAccounts.as_view()),
+    path('mainadmin/product/search',PartialSearchForProduct.as_view()),
+    path('mainadmin/subcategory/search',PartialSearchForSubCategory.as_view()),
+    path('user/order/search',PartialSearchForOrder.as_view()),
+    path('user/orderitems/search',PartialSearchForOrderItems.as_view()),
+    path('mainadmin/coupon/search',SortAccounts.as_view()),
+    path('user/wishlist/search',SortAccounts.as_view()),
+    path('mainadmin/attributes/search',SortAccounts.as_view()),
+    path('mainadmin/banner/search',SortAccounts.as_view()),
+    path('user/billingaddress/search',SortAccounts.as_view()),
+    
    
 ]
 

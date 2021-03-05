@@ -3,12 +3,12 @@ from django.views import View
 from rest_framework import generics, permissions,viewsets
 from rest_framework.response import Response
 from django.contrib.auth import login
-
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import permissions
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.views import LoginView as KnoxLoginView
-
-
+from rest_framework import filters
+from rest_framework.pagination import PageNumberPagination
 from .modelcontroller import *
 from .models import *
 from .serializers import *
@@ -530,4 +530,168 @@ class UpdateForOrder(generics.UpdateAPIView):
     def delete(self, request, *args, **kwargs):
         instance = self.get_object().delete()
         return Response({"message":"deleted Successfully","status":"success"})
- 
+
+class SortAccounts(generics.ListAPIView):
+    queryset = ChartOfAccounts.objects.all()
+    serializer_class = CategorySerializer
+    filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
+    filterset_fields = "__all__"
+    pagination_class = PageNumberPagination
+    pagination_class.page_size_query_param = 'limit'
+    
+    
+    ordering_fields = "__all__"
+
+class PartialSearchForAccounts(generics.ListAPIView):
+    
+    queryset = ChartOfAccounts.objects.all()
+    serializer_class = CategorySerializer
+    pagination_class = PageNumberPagination
+    pagination_class.page_size_query_param = 'limit'
+    
+
+    def get(self,request):
+        
+        name = request.GET.get('name')
+
+        instance = ChartOfAccounts.objects.filter(name__icontains=name)
+        
+       
+        if instance.exists():
+            
+            serializer = CategorySerializer(instance,many=True)
+            return Response({"data":serializer.data,"status":"success"})
+        else:
+            return Response({"data":"error","status":"error"})
+
+class SortProducts(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
+    filterset_fields = "__all__"
+    pagination_class = PageNumberPagination
+    pagination_class.page_size_query_param = 'limit'
+    
+    
+    ordering_fields = "__all__"
+
+class PartialSearchForProduct(generics.ListAPIView):
+    
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    pagination_class = PageNumberPagination
+    pagination_class.page_size_query_param = 'limit'
+    
+
+    def get(self,request):
+        
+        name = request.GET.get('name')
+
+        instance = Product.objects.filter(name__icontains=name)
+        
+       
+        if instance.exists():
+            
+            serializer = ProductSerializer(instance,many=True)
+            return Response({"data":serializer.data,"status":"success"})
+        else:
+            return Response({"data":"error","status":"error"})
+
+class SortSubCategory(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = SubCategorySerializer
+    filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
+    filterset_fields = "__all__"
+    pagination_class = PageNumberPagination
+    pagination_class.page_size_query_param = 'limit'
+    
+    
+    ordering_fields = "__all__"
+
+class PartialSearchForSubCategory(generics.ListAPIView):
+    
+    queryset = SubCategory.objects.all()
+    serializer_class = SubCategorySerializer
+    pagination_class = PageNumberPagination
+    pagination_class.page_size_query_param = 'limit'
+    
+
+    def get(self,request):
+        
+        name = request.GET.get('name')
+
+        instance = SubCategory.objects.filter(name__icontains=name)
+        
+       
+        if instance.exists():
+            
+            serializer = SubCategorySerializer(instance,many=True)
+            return Response({"data":serializer.data,"status":"success"})
+        else:
+            return Response({"data":"error","status":"error"})
+
+class SortOrder(generics.ListAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
+    filterset_fields = "__all__"
+    pagination_class = PageNumberPagination
+    pagination_class.page_size_query_param = 'limit'
+    
+    
+    ordering_fields = "__all__"
+
+class PartialSearchForOrder(generics.ListAPIView):
+    
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    pagination_class = PageNumberPagination
+    pagination_class.page_size_query_param = 'limit'
+    
+
+    def get(self,request):
+        
+        order_id = request.GET.get('order_id')
+
+        instance = Order.objects.filter(order_id__icontains=order_id)
+        
+       
+        if instance.exists():
+            
+            serializer = OrderSerializer(instance,many=True)
+            return Response({"data":serializer.data,"status":"success"})
+        else:
+            return Response({"data":"error","status":"error"})
+
+class SortOrderItems(generics.ListAPIView):
+    queryset = OrderItems.objects.all()
+    serializer_class = OrderItemSerializer
+    filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
+    filterset_fields = "__all__"
+    pagination_class = PageNumberPagination
+    pagination_class.page_size_query_param = 'limit'
+    
+    
+    ordering_fields = "__all__"
+
+class PartialSearchForOrderItems(generics.ListAPIView):
+    
+    queryset = OrderItems.objects.all()
+    serializer_class = OrderItemSerializer
+    pagination_class = PageNumberPagination
+    pagination_class.page_size_query_param = 'limit'
+    
+
+    def get(self,request):
+        
+        tracking_status = request.GET.get('tracking_status')
+
+        instance = OrderItems.objects.filter(tracking_status__icontains=tracking_status)
+        
+       
+        if instance.exists():
+            
+            serializer = OrderItemSerializer(instance,many=True)
+            return Response({"data":serializer.data,"status":"success"})
+        else:
+            return Response({"data":"error","status":"error"})

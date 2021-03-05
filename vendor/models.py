@@ -47,7 +47,7 @@ class Product(models.Model):
     price = models.FloatField()
     discount = models.IntegerField()
     tax = models.ForeignKey(ChartOfAccounts,on_delete=models.SET_NULL,null=True,related_name='tax')
-    attr_type = models.IntegerField(null=True,blank=True)
+    attribute = models.ManyToManyField("Attributes",related_name="attributes")
     total_stock = models.IntegerField()
     available_stock = models.IntegerField()
     brand = models.ForeignKey(ChartOfAccounts,on_delete=models.SET_NULL,null=True,related_name='brand')
@@ -78,7 +78,7 @@ class Attributes(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField()
     att_typenew = models.IntegerField()
-    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    
 
 
 class Coupon(models.Model):
