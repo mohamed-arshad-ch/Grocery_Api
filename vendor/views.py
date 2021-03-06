@@ -11,6 +11,7 @@ from rest_framework import filters
 from rest_framework.pagination import PageNumberPagination
 from .modelcontroller import *
 from .models import *
+import django_filters
 from .serializers import *
 from rest_framework import generics, permissions
 from rest_framework.response import Response
@@ -535,12 +536,12 @@ class SortAccounts(generics.ListAPIView):
     queryset = ChartOfAccounts.objects.all()
     serializer_class = CategorySerializer
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
-    filterset_fields = ['id','name','typeof','active']
+    filterset_fields = ['name']
     pagination_class = PageNumberPagination
     pagination_class.page_size_query_param = 'limit'
     
     
-    ordering_fields = ['id','name','typeof','active']
+    ordering_fields = ['name']
 
 class PartialSearchForAccounts(generics.ListAPIView):
     
@@ -568,12 +569,12 @@ class SortProducts(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
-    filterset_fields = ['date_created','date_time','name','category','subcategory','tag','description','price','discount','tax','attribute','brand','available_stock']
+    filterset_fields = ['name']
     pagination_class = PageNumberPagination
     pagination_class.page_size_query_param = 'limit'
     
     
-    ordering_fields = ['date_created','date_time','name','category','subcategory','tag','description','price','discount','tax','attribute','brand','available_stock']
+    ordering_fields = ['name']
 
 class PartialSearchForProduct(generics.ListAPIView):
     
@@ -667,7 +668,7 @@ class SortOrderItems(generics.ListAPIView):
     queryset = OrderItems.objects.all()
     serializer_class = OrderItemSerializer
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
-    filterset_fields = ['date_created','product','qty','active_status','tracking_status']
+    filterset_fields = "__all__"
     pagination_class = PageNumberPagination
     pagination_class.page_size_query_param = 'limit'
     
@@ -700,7 +701,7 @@ class SortCoupon(generics.ListAPIView):
     queryset = Coupon.objects.all()
     serializer_class = CouponSerializer
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
-    filterset_fields = ['date_created','product','qty','active_status','tracking_status']
+    filterset_fields = "__all__"
     pagination_class = PageNumberPagination
     pagination_class.page_size_query_param = 'limit'
     
@@ -734,7 +735,7 @@ class SortWishlist(generics.ListAPIView):
     queryset = Wishlist.objects.all()
     serializer_class = WishlistSerializer
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
-    filterset_fields = ['date_created','product','qty','active_status','tracking_status']
+    filterset_fields = "__all__"
     pagination_class = PageNumberPagination
     pagination_class.page_size_query_param = 'limit'
     
@@ -767,7 +768,7 @@ class SortAttributes(generics.ListAPIView):
     queryset = Attributes.objects.all()
     serializer_class = AttributesSerializer
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
-    filterset_fields = ['date_created','product','qty','active_status','tracking_status']
+    filterset_fields = "__all__"
     pagination_class = PageNumberPagination
     pagination_class.page_size_query_param = 'limit'
     
@@ -797,10 +798,10 @@ class PartialSearchForAttributes(generics.ListAPIView):
             return Response({"data":"error","status":"error"})
 
 class SortBanner(generics.ListAPIView):
-    queryset = Attributes.objects.all()
+    queryset = BannerSettings.objects.all()
     serializer_class = BannerSerializer
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
-    filterset_fields = ['date_created','product','qty','active_status','tracking_status']
+    filterset_fields = ['id','quote1','quote2','active','status']
     pagination_class = PageNumberPagination
     pagination_class.page_size_query_param = 'limit'
     
