@@ -91,7 +91,7 @@ class CreateOrderItem(generics.GenericAPIView):
 
 class CreateSubCategory(generics.GenericAPIView):
     serializer_class = SubCategorySerializer
-
+    
     def post(self,request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)

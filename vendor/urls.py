@@ -12,7 +12,7 @@ urlpatterns = [
     path('mainadmin/category',CreateCategory.as_view()),
     path('user/order',CreateOrder.as_view()),
     path('user/orderitems',CreateOrderItem.as_view()),
-    path('mainadmin/subcategory',CreateCategory.as_view()),
+    path('mainadmin/subcategory',CreateSubCategory.as_view()),
     path('user/billingaddress',CreateBillingAddress.as_view()),
     path('mainadmin/banner',CreateBanner.as_view()),
     path('user/wishlist',CreateWishlist.as_view()),
