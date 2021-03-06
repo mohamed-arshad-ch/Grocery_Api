@@ -52,7 +52,7 @@ class LoginAPI(KnoxLoginView):
         else:
             return Response(
                 {
-                    "data":serializer.errors
+                    "data":serializer.errors,
                     "status":"error"
                 }
             )
