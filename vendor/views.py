@@ -49,7 +49,7 @@ class CreateProduct(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         product = serializer.save()
         return Response({
-        "user": ProductSerializer(product, context=self.get_serializer_context()).data,
+        "data": ProductSerializer(product, context=self.get_serializer_context()).data,
         "status":"success" 
         })
 
@@ -61,7 +61,7 @@ class CreateCategory(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         category = serializer.save()
         return Response({
-        "user": CategorySerializer(category, context=self.get_serializer_context()).data,
+        "data": CategorySerializer(category, context=self.get_serializer_context()).data,
         "status":"success" 
         })
 
@@ -73,7 +73,7 @@ class CreateOrder(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         order = serializer.save()
         return Response({
-        "user": ReadOrderSerializer(order, context=self.get_serializer_context()).data,
+        "data": ReadOrderSerializer(order, context=self.get_serializer_context()).data,
         "status":"success" 
         })
 
@@ -85,7 +85,7 @@ class CreateOrderItem(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         order = serializer.save()
         return Response({
-        "user": OrderItemSerializer(order, context=self.get_serializer_context()).data,
+        "data": OrderItemSerializer(order, context=self.get_serializer_context()).data,
         "status":"success" 
         })
 
@@ -97,7 +97,7 @@ class CreateSubCategory(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         order = serializer.save()
         return Response({
-        "user": SubCategorySerializer(order, context=self.get_serializer_context()).data,
+        "data": SubCategorySerializer(order, context=self.get_serializer_context()).data,
         "status":"success" 
         })
 
@@ -109,7 +109,7 @@ class CreateBillingAddress(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         billingaddress = serializer.save()
         return Response({
-        "user": BillingAddressSerializer(billingaddress, context=self.get_serializer_context()).data,
+        "data": BillingAddressSerializer(billingaddress, context=self.get_serializer_context()).data,
         "status":"success" 
         })
 
@@ -121,7 +121,7 @@ class CreateWishlist(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         wishlist = serializer.save()
         return Response({
-        "user": WishlistSerializer(wishlist, context=self.get_serializer_context()).data,
+        "data": WishlistSerializer(wishlist, context=self.get_serializer_context()).data,
         "status":"success" 
         })
 
@@ -133,7 +133,7 @@ class CreateBanner(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         banner = serializer.save()
         return Response({
-        "user": BannerSerializer(banner, context=self.get_serializer_context()).data,
+        "data": BannerSerializer(banner, context=self.get_serializer_context()).data,
         "status":"success" 
         })
 
@@ -145,7 +145,7 @@ class CreateCoupon(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         coupon = serializer.save()
         return Response({
-        "user": CouponSerializer(coupon, context=self.get_serializer_context()).data,
+        "data": CouponSerializer(coupon, context=self.get_serializer_context()).data,
         "status":"success" 
         })
 
@@ -157,7 +157,7 @@ class CreateAttributes(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         attributes = serializer.save()
         return Response({
-        "user": AttributesSerializer(attributes, context=self.get_serializer_context()).data,
+        "data": AttributesSerializer(attributes, context=self.get_serializer_context()).data,
         "status":"success" 
         })
 
