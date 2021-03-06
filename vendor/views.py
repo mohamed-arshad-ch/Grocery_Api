@@ -40,13 +40,22 @@ class LoginAPI(KnoxLoginView):
     def post(self, request, format=None):
         serializer = AuthTokenSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        login(request, user)
-        main_data = super(LoginAPI, self).post(request, format=None)
-        main_data.data['status'] = "success"
-        newu = CustomUser.objects.get(username=request.data['username'])
-        main_data.data['id'] = newu.id
-        return main_data
+        if serializer.is_valid():
+
+            user = serializer.validated_data['user']
+            login(request, user)
+            main_data = super(LoginAPI, self).post(request, format=None)
+            main_data.data['status'] = "success"
+            newu = CustomUser.objects.get(username=request.data['username'])
+            main_data.data['id'] = newu.id
+            return main_data
+        else:
+            return Response(
+                {
+                    "data":serializer.errors
+                    "status":"error"
+                }
+            )
 
 
 class CreateProduct(generics.GenericAPIView):
