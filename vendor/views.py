@@ -535,12 +535,12 @@ class SortAccounts(generics.ListAPIView):
     queryset = ChartOfAccounts.objects.all()
     serializer_class = CategorySerializer
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
-    filterset_fields = ['name','typeof','active']
+    filterset_fields = ['id','name','typeof','active']
     pagination_class = PageNumberPagination
     pagination_class.page_size_query_param = 'limit'
     
     
-    ordering_fields = ['name','typeof','active']
+    ordering_fields = ['id','name','typeof','active']
 
 class PartialSearchForAccounts(generics.ListAPIView):
     
@@ -667,7 +667,7 @@ class SortOrderItems(generics.ListAPIView):
     queryset = OrderItems.objects.all()
     serializer_class = OrderItemSerializer
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
-    filterset_fields = "__all__"
+    filterset_fields = ['date_created','product','qty','active_status','tracking_status']
     pagination_class = PageNumberPagination
     pagination_class.page_size_query_param = 'limit'
     
@@ -692,6 +692,139 @@ class PartialSearchForOrderItems(generics.ListAPIView):
         if instance.exists():
             
             serializer = OrderItemSerializer(instance,many=True)
+            return Response({"data":serializer.data,"status":"success"})
+        else:
+            return Response({"data":"error","status":"error"})
+
+class SortCoupon(generics.ListAPIView):
+    queryset = Coupon.objects.all()
+    serializer_class = CouponSerializer
+    filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
+    filterset_fields = ['date_created','product','qty','active_status','tracking_status']
+    pagination_class = PageNumberPagination
+    pagination_class.page_size_query_param = 'limit'
+    
+    
+    ordering_fields = "__all__"
+
+class PartialSearchForCoupon(generics.ListAPIView):
+    
+    queryset = Coupon.objects.all()
+    serializer_class = CouponSerializer
+    pagination_class = PageNumberPagination
+    pagination_class.page_size_query_param = 'limit'
+    
+
+    def get(self,request):
+        
+        tracking_status = request.GET.get('tracking_status')
+
+        instance = Coupon.objects.filter(tracking_status__icontains=tracking_status)
+        
+       
+        if instance.exists():
+            
+            serializer = CouponSerializer(instance,many=True)
+            return Response({"data":serializer.data,"status":"success"})
+        else:
+            return Response({"data":"error","status":"error"})
+
+
+class SortWishlist(generics.ListAPIView):
+    queryset = Wishlist.objects.all()
+    serializer_class = WishlistSerializer
+    filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
+    filterset_fields = ['date_created','product','qty','active_status','tracking_status']
+    pagination_class = PageNumberPagination
+    pagination_class.page_size_query_param = 'limit'
+    
+    
+    ordering_fields = "__all__"
+
+class PartialSearchForWishlist(generics.ListAPIView):
+    
+    queryset = Wishlist.objects.all()
+    serializer_class = WishlistSerializer
+    pagination_class = PageNumberPagination
+    pagination_class.page_size_query_param = 'limit'
+    
+
+    def get(self,request):
+        
+        tracking_status = request.GET.get('tracking_status')
+
+        instance = Wishlist.objects.filter(tracking_status__icontains=tracking_status)
+        
+       
+        if instance.exists():
+            
+            serializer = WishlistSerializer(instance,many=True)
+            return Response({"data":serializer.data,"status":"success"})
+        else:
+            return Response({"data":"error","status":"error"})
+
+class SortAttributes(generics.ListAPIView):
+    queryset = Attributes.objects.all()
+    serializer_class = AttributesSerializer
+    filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
+    filterset_fields = ['date_created','product','qty','active_status','tracking_status']
+    pagination_class = PageNumberPagination
+    pagination_class.page_size_query_param = 'limit'
+    
+    
+    ordering_fields = "__all__"
+
+class PartialSearchForAttributes(generics.ListAPIView):
+    
+    queryset = Attributes.objects.all()
+    serializer_class = AttributesSerializer
+    pagination_class = PageNumberPagination
+    pagination_class.page_size_query_param = 'limit'
+    
+
+    def get(self,request):
+        
+        tracking_status = request.GET.get('tracking_status')
+
+        instance = Attributes.objects.filter(tracking_status__icontains=tracking_status)
+        
+       
+        if instance.exists():
+            
+            serializer = AttributesSerializer(instance,many=True)
+            return Response({"data":serializer.data,"status":"success"})
+        else:
+            return Response({"data":"error","status":"error"})
+
+class SortBanner(generics.ListAPIView):
+    queryset = Attributes.objects.all()
+    serializer_class = BannerSerializer
+    filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
+    filterset_fields = ['date_created','product','qty','active_status','tracking_status']
+    pagination_class = PageNumberPagination
+    pagination_class.page_size_query_param = 'limit'
+    
+    
+    ordering_fields = "__all__"
+
+class PartialSearchForBanner(generics.ListAPIView):
+    
+    queryset = BannerSettings.objects.all()
+    serializer_class = BannerSerializer
+    pagination_class = PageNumberPagination
+    pagination_class.page_size_query_param = 'limit'
+    
+
+    def get(self,request):
+        
+        tracking_status = request.GET.get('tracking_status')
+
+        instance = BannerSettings.objects.filter(tracking_status__icontains=tracking_status)
+        
+       
+        if instance.exists():
+            
+            serializer = BannerSerializer(instance,many=True)
             return Response({"data":serializer.data,"status":"success"})
         else:
             return Response({"data":"error","status":"error"})
