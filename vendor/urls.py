@@ -9,6 +9,7 @@ urlpatterns = [
     path('user/login',LoginAPI.as_view()),
     path('mainadmin/product',CreateProduct.as_view()),
     # path('mainadmin/add-subcategory',CreateProduct.as_view()),
+    path('user/fetch/<str:pk>',FetchUser.as_view()),
     path('mainadmin/category',CreateCategory.as_view()),
     path('user/order',CreateOrder.as_view()),
     path('user/orderitems',CreateOrderItem.as_view()),

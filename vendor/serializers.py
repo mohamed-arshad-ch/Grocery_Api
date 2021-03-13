@@ -17,7 +17,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         user = CustomUser.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
 
         return user
-
+class ReadUserAll(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = "__all__"
+        extra_kwargs = {'password': {'write_only': True}}
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product

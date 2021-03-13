@@ -65,7 +65,23 @@ class LoginAPI(KnoxLoginView):
                     "status":"error"
                 }
             )
+class FetchUser(generics.UpdateAPIView):
+    serializer_class = ProductSerializer
+    queryset = Product.objects.all()
 
+    def get(self, request, *args, **kwargs):
+        try:
+            queryset, status = ModelController(
+                table=CustomUser).get_one_content(val=kwargs['pk'])
+            if status:
+
+                serializer = ReadUserAll(queryset)
+
+                return Response({"data": serializer.data, "status": "success"})
+            else:
+                return Response({"data": "Data Not Available", "status": "error"})
+        except Product.DoesNotExist:
+            return Response({"status": "error"}, status=status.HTTP_404_NOT_FOUND)
 
 class CreateProduct(generics.GenericAPIView):
     serializer_class = ProductSerializer
