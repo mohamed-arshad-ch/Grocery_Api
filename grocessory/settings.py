@@ -126,6 +126,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'static')
+]
+
+MEDIA_URL = '/img/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/img')
+
 REST_FRAMEWORK = {
     'SEARCH_PARAM':'name',
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
