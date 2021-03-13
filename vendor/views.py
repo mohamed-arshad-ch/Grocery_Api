@@ -28,11 +28,18 @@ class RegisterUser(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        return Response({
-            "user": UserSerializer(user, context=self.get_serializer_context()).data,
-            "token": AuthToken.objects.create(user)[1],
-            "status":"success",
-            "id":user.id
+        if serializer.is_valid():
+            return Response({
+                "user": UserSerializer(user, context=self.get_serializer_context()).data,
+                "token": AuthToken.objects.create(user)[1],
+                "status":"success",
+                "id":user.id
+            })
+        else:
+            serializer.errors['status'] = "error"
+            return Response({
+            
+            serializer.errors
         })
 
 
