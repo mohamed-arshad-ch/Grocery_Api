@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'knox',
     'django_filters',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +58,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'grocessory.urls'
-
+CORS_ORIGIN_ALLOW_ALL = True 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
